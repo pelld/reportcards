@@ -1,10 +1,10 @@
 Package: reportcards
 Type: Package
 Title: Simple Metric Cards for Quarto Reports
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("David", "Pell", email = "5339514+pelld@users.noreply.github.com", role = c("aut", "cre"))
-Description: Lightweight HTML metric cards and responsive grids for Quarto and
-    R Markdown reports. Cards are created from simple values such as a name,
+Description: Lightweight HTML metric cards and responsive layouts for Quarto and
+    R Markdown reports. A single function creates one card or a grid from simple values such as a name,
     metric, colour, band and detail text.
 License: MIT + file LICENSE
 Encoding: UTF-8
