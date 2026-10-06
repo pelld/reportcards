@@ -2,7 +2,9 @@
 
 Simple, reusable metric cards for Quarto and R Markdown reports.
 
-The package is deliberately general: pass ordinary values such as `name`, `metric`, `colour`, `band` and `detail`, and it renders a responsive grid.
+There is one main function: `card()`.
+
+Give it one set of values and it returns one card. Give it vectors and it returns a responsive grid.
 
 ## Install
 
@@ -10,59 +12,11 @@ The package is deliberately general: pass ordinary values such as `name`, `metri
 remotes::install_github("pelld/reportcards")
 ```
 
-## Use
+## One card
 
 ```r
 library(reportcards)
 
-card_grid(
-  columns = 3,
-  name = c("APCS", "ECDS", "OPA"),
-  metric = c("7.4%", "9.1%", "5.8%"),
-  colour = "#005eb8",
-  band = c("Inpatient", "A&E", "Outpatients")
-)
-```
-
-The number of cards is determined by the values supplied. A single value is recycled across all cards:
-
-```r
-card_grid(
-  name = c("Activity", "Patients", "Rate", "Change"),
-  metric = c("120,431", "88,091", "7.4%", "-0.8 pp"),
-  colour = "#005eb8",
-  band = "Latest month",
-  columns = 4
-)
-```
-
-Or give each card its own colour:
-
-```r
-card_grid(
-  name = c("Good", "Watch", "Poor"),
-  metric = c("92%", "78%", "61%"),
-  colour = c("#007f3b", "#ed8b00", "#d5281b"),
-  band = "Performance"
-)
-```
-
-Optional detail text can also vary by card:
-
-```r
-card_grid(
-  name = c("Waiting list", "12-hour waits"),
-  metric = c("42,381", "7.1%"),
-  colour = c("#005eb8", "#d5281b"),
-  band = c("Patients", "A&E"),
-  detail = c("Down 3.2% since last month", "Up 0.6 pp since last month"),
-  columns = 2
-)
-```
-
-For a single card:
-
-```r
 card(
   name = "Vacancy rate",
   metric = "8.4%",
@@ -72,4 +26,39 @@ card(
 )
 ```
 
-The CSS is bundled automatically with the package, so an HTML Quarto document only needs to load the package and call the function.
+## Multiple cards
+
+```r
+card(
+  name = c("APCS", "ECDS", "OPA"),
+  metric = c("7.4%", "9.1%", "5.8%"),
+  colour = "#005eb8",
+  band = c("Inpatient", "A&E", "Outpatients")
+)
+```
+
+The number of cards is inferred from the values supplied. Scalar values are recycled across every card, so the single colour above is used for all three.
+
+Each card can also have its own values:
+
+```r
+card(
+  name = c("Good", "Watch", "Poor"),
+  metric = c("92%", "78%", "61%"),
+  colour = c("#007f3b", "#ed8b00", "#d5281b"),
+  band = "Performance",
+  detail = c("Above target", "Close to target", "Below target")
+)
+```
+
+By default the grid lays itself out responsively. If you want a particular number of columns, specify it:
+
+```r
+card(
+  name = c("One", "Two", "Three", "Four"),
+  metric = c(10, 20, 30, 40),
+  columns = 2
+)
+```
+
+The CSS is bundled automatically with the package, so an HTML Quarto document only needs to load the package and call `card()`.
