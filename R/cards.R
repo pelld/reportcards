@@ -92,7 +92,7 @@ card <- function(name, metric, colour = "#005eb8", band = NULL,
     htmltools::div,
     c(
       list(class = grid_class, style = grid_style),
-      cards
+      unname(cards)
     )
   )
 
